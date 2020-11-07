@@ -7,7 +7,7 @@ const STREAMER = require("../models/STREAMER")
 const {client} = require("../index")
 const fetch = require("node-fetch")
 
-var redirect_uri = "http://server.dustin-dm.de:4536/twitch/oauth2/redirect"
+var redirect_uri = "https://the-fighters.dustin-dm.de/twitch/oauth2/redirect"
 
 const app = express()
 app.use(bodyParser.urlencoded({ extended: false }));
