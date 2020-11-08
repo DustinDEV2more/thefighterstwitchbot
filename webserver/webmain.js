@@ -4,9 +4,8 @@ const bodyParser = require('body-parser');
 const { default: Axios } = require("axios")
 const nanoid = require("nanoid")
 const STREAMER = require("../models/STREAMER")
-const { MessageEmbed } = require('discord.js');
 const {client} = require("../index")
-const fetch = require("node-fetch");
+const fetch = require("node-fetch")
 
 var redirect_uri = "https://the-fighters.dustin-dm.de/twitch/oauth2/redirect"
 
@@ -42,9 +41,6 @@ app.get("/twitch/oauth2", (req, res) => {
     `&state=${genstatetoken(true)}`)
 })
 
-const twitchwebhook = require("./routes/twitchwebhook")
-app.use("/twitch/webhook", twitchwebhook)
-
 //Verify state
 app.get("/twitch/oauth2/redirect", (req, res, next) => {
 if (req.query.error == "access_denied") return res.send("Twitch hat uns mitgeteilt das du nicht den OAuth2 flow zugestimmt hast. Du wurdest nicht zur Database hinzugefügt. Du kannst diesen Tab nun schließen")
@@ -77,7 +73,7 @@ app.get("/twitch/oauth2/redirect",(req, res, next) => {
             oauth: {token: code, scopes: scopes}}).save().then(doc => {
                 console.log(doc)
                 res.send(`Der Twitch Streamer "${name}" wurde erfolgreich in der Database gespeichert!\n\nDu kannst diesen Tab nun schließen`)
-                client.channels.cache.get("774962486503800842").send(new MessageEmbed().setTitle("Ein neuer Streamer wurde zur Streamer Database hinzugefügt!").addField("Name:", name, true).addField("ID:", id, true).addField("granted permissions:", scopes.join(", ")).addField("⚠️oauth2-code:", `||${code}||`).setThumbnail(json.data[0]["profile_image_url"]).setFooter("⚠️ Do NOT share any information of these messages to others!", null).setColor("#6441a5"))
+
             })
     })
 }).catch(error => console.log(error))
@@ -85,8 +81,6 @@ app.get("/twitch/oauth2/redirect",(req, res, next) => {
 
 
 })
-
-
 app.listen(4536, () => {
     console.log("Webserver is active and listenig on 4536")
 })
