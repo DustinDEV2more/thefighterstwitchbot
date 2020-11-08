@@ -14,5 +14,6 @@ client.on("ready", () => {
 
 
 require("./webserver/webmain")
+require("./events/welcome")
 
 client.login(config.discord)
