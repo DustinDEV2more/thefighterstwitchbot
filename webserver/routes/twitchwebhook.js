@@ -19,7 +19,6 @@ app.use("/mainsup/:event/:token", (req, res) => {
     if (req.method == "GET"){
       if (req.query["hub.mode"] == "unsubscribe") res.send(req.query["hub.challenge"])
       if (req.query["hub.mode"] == "subscribe" && req.params.token == session_token) res.send(req.query["hub.challenge"])
-      console.log(`\x1b[32m${req.query["hub.mode"]}: ${req.query["hub.topic"]}\x1b[0m`)
     }
     else if (req.method == "POST"){
         res.sendStatus(200)
@@ -46,7 +45,7 @@ function updatetwitchsupscription() {
               Axios.post("https://api.twitch.tv/helix/webhooks/hub", {"hub.callback": s.callback, "hub.mode": "unsubscribe", "hub.topic": s.topic}, {
           headers: {"Authorization": "Bearer " + json.access_token,
             "Client-ID": config.twitch.clientid }})
-            console.log(`\x1b[33m[Twitch Webhook] Send unsubscribe request for ${s.topic}\x1b[0m`)})
+            })
           })  .catch(function (error) { console.log(error);});
       
         }).then(async () => {
