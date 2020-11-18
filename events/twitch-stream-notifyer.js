@@ -34,7 +34,7 @@ class Streamnotifyer {
     .setURL(`https://twitch.tv/${json.data[0].login}`)
     .setColor("#6441a5")
     .setThumbnail(icon)
-    .setImage(data[0].thumbnail_url.replace("-{width}x{height}", "-1280x720"))
+    .setImage(`https://the-fighters.dustin-dm.de/twitch/image/${name}/${sid}`)
     .addField("Title", data[0].title)
     .addField("Game", game.data[0].name, true)
     )

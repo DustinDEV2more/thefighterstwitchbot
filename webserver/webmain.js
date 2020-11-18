@@ -48,6 +48,9 @@ app.use("/twitch/webhook", twitchwebhook)
 const api = require("./routes/api")
 app.use("/api", api)
 
+const streamimages = require("./routes/streamimage")
+app.use("/twitch/image", streamimages)
+
 //Verify state
 app.get("/twitch/oauth2/redirect", (req, res, next) => {
 if (req.query.error == "access_denied") return res.send("Twitch hat uns mitgeteilt das du nicht den OAuth2 flow zugestimmt hast. Du wurdest nicht zur Database hinzugefügt. Du kannst diesen Tab nun schließen")
